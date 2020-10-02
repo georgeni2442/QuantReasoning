@@ -1,0 +1,12 @@
+---
+title: "Problem Set 3"
+author: "Liza Morse"
+date: "10/2/2020"
+output: html_document
+---
+
+1)
+
+2)
+
+3) 
