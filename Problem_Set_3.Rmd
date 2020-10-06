@@ -12,6 +12,7 @@ library(popdemo)
 load("COMADRE_v.4.20.9.0 (1).rdata")
 
 
+comadre$matrixClass[[835]]$MatrixClassAuthor
 
 comadre$metadata$CommonName
 comadre$mat[[835]]$matA #835=1997-2010
