@@ -12,6 +12,8 @@ library(popdemo)
 load("COMADRE_v.4.20.9.0 (1).rdata")
 
 
+# Calculations for Nestbox Data:
+
 comadre$matrixClass[[835]]$MatrixClassAuthor
 
 comadre$metadata$CommonName
@@ -22,12 +24,16 @@ lambdaVal<-eigs(comadre$mat[[835]]$matA, what="lambda") #dominant eigenvalue
 rightVal<-eigs(comadre$mat[[835]]$matA, what="ss")
 rightVal
 ```
-1)
+1) What species (and location if available) did you choose? Why did you choose the species?
 
-2)
+2) What question do you want to answer about this population (e.g. population status, best management strategies)?
 
-3) 
+Are nestboxes an effective strategy to increase Peregrine Falcon population in the Cape region of South Africa? If nest boxes were an effective strategy, we would expect to see a higher proportion of Subadults and Breeders age classes in the stable distribution of the "nestbox" population as compared to the natural breeding population.    
 
-4)
+3) Calculate eigenvalue, stable age distribution, elasticity, and sensitivity. What does this tell you about the population?
 
-5)
+Sensitivity = what effect does a change have on the population growth rate
+
+4) Using the calculations in part (c), or additional calculations, address the question you proposed in part (b).
+
+
