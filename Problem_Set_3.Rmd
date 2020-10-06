@@ -5,11 +5,11 @@ date: "10/2/2020"
 output: html_document
 ---
 
-1)
+1) What species (and location if available) did you choose? Why did you choose the species?
 
-2)
+2) What question do you want to answer about this population (e.g. population status, best management strategies)?
 
-3) 
+3) Calculate eigenvalue, stable age distribution, elasticity, and sensitivity. What does this tell you about the population?
 
-4)
+4) Using the calculations in part (c), or additional calculations, address the question you proposed in part (b).
 
