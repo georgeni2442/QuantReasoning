@@ -1,0 +1,32 @@
+---
+title: "Problem Set 3"
+author: "Liza Morse"
+date: "10/2/2020"
+output: html_document
+---
+
+```{r}
+install.packages("popdemo")
+library(popdemo)
+
+load("COMADRE_v.4.20.9.0 (1).rdata")
+
+
+
+comadre$metadata$CommonName
+comadre$mat[[835]]$matA #835=1997-2010
+
+lambdaVal<-eigs(comadre$mat[[835]]$matA, what="lambda") #dominant eigenvalue
+#   -0.14969159346691008 for other lambda value
+rightVal<-eigs(comadre$mat[[835]]$matA, what="ss")
+rightVal
+```
+1)
+
+2)
+
+3) 
+
+4)
+
+5)
