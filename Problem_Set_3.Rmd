@@ -6,10 +6,17 @@ output: html_document
 ---
 
 ```{r}
-load("COMADRE_v.4.20.9.0 (1).rdata")
-comadre$metadata$CommonName
-comadre$mat[835][[1]] #835=1997-2010
+install.packages("popdemo")
+library(popdemo)
 
+load("COMADRE_v.4.20.9.0 (1).rdata")
+
+
+
+comadre$metadata$CommonName
+comadre$mat[[835]]$matA #835=1997-2010
+
+lambdaVal<-eigs(comadre$mat[[835]]$matA, what="lambda")
 
 ```
 1)
