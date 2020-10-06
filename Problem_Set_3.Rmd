@@ -5,25 +5,6 @@ date: "10/2/2020"
 output: html_document
 ---
 
-```{r}
-install.packages("popdemo")
-library(popdemo)
-
-load("COMADRE_v.4.20.9.0 (1).rdata")
-
-
-# Calculations for Nestbox Data:
-
-comadre$matrixClass[[835]]$MatrixClassAuthor
-
-comadre$metadata$CommonName
-comadre$mat[[835]]$matA #835=1997-2010
-
-lambdaVal<-eigs(comadre$mat[[835]]$matA, what="lambda") #dominant eigenvalue
-#   -0.14969159346691008 for other lambda value
-rightVal<-eigs(comadre$mat[[835]]$matA, what="ss")
-rightVal
-```
 1) What species (and location if available) did you choose? Why did you choose the species?
 
 2) What question do you want to answer about this population (e.g. population status, best management strategies)?
@@ -31,6 +12,36 @@ rightVal
 Are nestboxes an effective strategy to increase Peregrine Falcon population in the Cape region of South Africa? If nest boxes were an effective strategy, we would expect to see a higher proportion of Subadults and Breeders age classes in the stable distribution of the "nestbox" population as compared to the natural breeding population.    
 
 3) Calculate eigenvalue, stable age distribution, elasticity, and sensitivity. What does this tell you about the population?
+
+```{r}
+install.packages("popdemo")
+library(popdemo)
+
+load("COMADRE_v.4.20.9.0 (1).rdata")
+
+# Calculations for Nestbox Data:
+
+comadre$matrixClass[[835]]$MatrixClassAuthor
+
+comadre$metadata$CommonName
+comadre$mat[[835]]$matA #835 is 1997-2010 for Nestbox data
+
+lambdaVal_nestbox <-eigs(comadre$mat[[835]]$matA, what="lambda") #dominant eigenvalue
+#   -0.14969159346691008 for other lambda value
+rightVal_nestbox <-eigs(comadre$mat[[835]]$matA, what="ss") #eigen vector (aka stable age distribution)
+rightVal_nestbox
+```
+
+```{r}
+# Calculations for Unmanipulated Data:
+
+comadre$mat[[849]]$matA #849 is 1997-2010 for unmanipulated data data
+
+lambdaVal_unmanipulated <-eigs(comadre$mat[[849]]$matA, what="lambda") #eigenvalue
+
+rightVal_unmanipulated <-eigs(comadre$mat[[849]]$matA, what="ss") #eigen vector (aka stable age distribution)
+rightVal_unmanipulated
+```
 
 Sensitivity = what effect does a change have on the population growth rate
 
