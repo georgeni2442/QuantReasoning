@@ -15,6 +15,8 @@ Are nestboxes an effective strategy to increase Peregrine Falcon population in t
 
 ```{r}
 install.packages("popdemo")
+install.packages("popbio")
+library(popbio)
 library(popdemo)
 
 load("COMADRE_v.4.20.9.0 (1).rdata")
@@ -30,6 +32,10 @@ lambdaVal_nestbox <-eigs(comadre$mat[[835]]$matA, what="lambda") #dominant eigen
 #   -0.14969159346691008 for other lambda value
 rightVal_nestbox <-eigs(comadre$mat[[835]]$matA, what="ss") #eigen vector (aka stable age distribution)
 rightVal_nestbox
+
+sense<-sensitivity(comadre$mat[[835]]$matA)
+elast<-elasticity(comadre$mat[[835]]$matA)
+#Sensitivity-
 ```
 
 ```{r}
@@ -41,6 +47,9 @@ lambdaVal_unmanipulated <-eigs(comadre$mat[[849]]$matA, what="lambda") #eigenval
 
 rightVal_unmanipulated <-eigs(comadre$mat[[849]]$matA, what="ss") #eigen vector (aka stable age distribution)
 rightVal_unmanipulated
+
+sense2<-sensitivity(comadre$mat[[849]]$matA)
+elast2<-elasticity(comadre$mat[[849]]$matA)
 ```
 
 Sensitivity = what effect does a change have on the population growth rate
