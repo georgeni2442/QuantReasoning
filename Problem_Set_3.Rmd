@@ -2,10 +2,14 @@
 title: "Problem Set 3"
 author: "Liza Morse"
 date: "10/2/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 1) What species (and location if available) did you choose? Why did you choose the species?
+
+We chose the peregrine falcon population studied in Capetown, South Africa. As both team members were familiar with peregrine falcons and their conservation history in the U.S, they thought it would be interesting to study effect of introducing nestboxes to peregrine falcon and determining their effect on population status. 
 
 2) What question do you want to answer about this population (e.g. population status, best management strategies)?
 
@@ -14,8 +18,6 @@ Are nestboxes an effective strategy to increase Peregrine Falcon population in t
 3) Calculate eigenvalue, stable age distribution, elasticity, and sensitivity. What does this tell you about the population?
 
 ```{r}
-install.packages("popdemo")
-install.packages("popbio")
 library(popbio)
 library(popdemo)
 
@@ -54,4 +56,23 @@ elast2<-elasticity(comadre$mat[[849]]$matA)
 
 4) Using the calculations in part (c), or additional calculations, address the question you proposed in part (b).
 
+Eigenvalues for nestboxes and unmanipulated populations were 1.03127, and 0.9368. The stable age distributions, or right eigenvector, are shown below: 
+
+```{r}
+rightVal_nestbox
+rightVal_unmanipulated
+```
+The sensitivities: 
+
+```{r}
+sense<-sensitivity(comadre$mat[[835]]$matA)
+sense2<-sensitivity(comadre$mat[[849]]$matA)
+```
+
+And the elasticities:
+
+```{r}
+elast<-elasticity(comadre$mat[[835]]$matA)
+elast2<-elasticity(comadre$mat[[849]]$matA)
+```
 
