@@ -17,11 +17,11 @@ Are nestboxes an effective strategy to increase Peregrine Falcon population in t
 
 3) Calculate eigenvalue, stable age distribution, elasticity, and sensitivity. What does this tell you about the population?
 
-```{r}
+```{r, echo=FALSE}
 library(popbio)
 library(popdemo)
 
-load("COMADRE_v.4.20.9.0 (1).rdata")
+load("COMADRE_v.4.20.9.0.rdata")
 
 # Calculations for Nestbox Data:
 
