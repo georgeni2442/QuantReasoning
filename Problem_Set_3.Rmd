@@ -7,32 +7,32 @@ output:
   html_document: default
 ---
 
-1) What species (and location if available) did you choose? Why did you choose the species?
-
-We chose the peregrine falcon population studied in Capetown, South Africa. As both team members were familiar with peregrine falcons and their conservation history in the U.S, they thought it would be interesting to study effect of introducing nestboxes to peregrine falcon and determining their effect on population status. 
-
-2) What question do you want to answer about this population (e.g. population status, best management strategies)?
-
-Are nestboxes an effective strategy to increase Peregrine Falcon population in the Cape region of South Africa? If nest boxes were an effective strategy, we would expect to see a higher proportion of Subadults and Breeders age classes in the stable distribution of the "nestbox" population as compared to the natural breeding population.    
-
-3) Calculate eigenvalue, stable age distribution, elasticity, and sensitivity. What does this tell you about the population?
-
-```{r, echo=FALSE}
+```{r}
 library(popbio)
 library(popdemo)
 
 load("COMADRE_v.4.20.9.0.rdata")
 
-# Calculations for Nestbox Data:
+```
+# 1) What species (and location if available) did you choose? Why did you choose the species?
 
-comadre$matrixClass[[835]]$MatrixClassAuthor
+We chose the peregrine falcon population studied in Capetown, South Africa. As both team members were familiar with peregrine falcons and their conservation history in the U.S, they thought it would be interesting to study effect of introducing nestboxes to peregrine falcon and determining their effect on population status. 
+
+# 2) What question do you want to answer about this population (e.g. population status, best management strategies)?
+
+Are nestboxes an effective strategy to increase Peregrine Falcon population in the Cape region of South Africa? If nest boxes were an effective strategy, we would expect to see a higher proportion of Subadults and Breeders age classes in the stable distribution of the "nestbox" population as compared to the natural breeding population.    
+
+# 3) Calculate eigenvalue, stable age distribution, elasticity, and sensitivity. What does this tell you about the population?
+
+```{r}
+# Calculations for Nestbox Data:
 
 comadre$mat[[835]]$matA #835 is 1997-2010 for Nestbox data
 
 lambdaVal_nestbox <-eigs(comadre$mat[[835]]$matA, what="lambda") #dominant eigenvalue
 #   -0.14969159346691008 for other lambda value
 rightVal_nestbox <-eigs(comadre$mat[[835]]$matA, what="ss") #eigen vector (aka stable age distribution)
-rightVal_nestbox
+
 
 sense<-sensitivity(comadre$mat[[835]]$matA)
 elast<-elasticity(comadre$mat[[835]]$matA)
@@ -47,8 +47,7 @@ comadre$mat[[849]]$matA #849 is 1997-2010 for unmanipulated data data
 lambdaVal_unmanipulated <-eigs(comadre$mat[[849]]$matA, what="lambda") #eigenvalue
 
 rightVal_unmanipulated <-eigs(comadre$mat[[849]]$matA, what="ss") #eigen vector (aka stable age distribution)
-rightVal_unmanipulated
-
+s
 sense2<-sensitivity(comadre$mat[[849]]$matA)
 elast2<-elasticity(comadre$mat[[849]]$matA)
 ```
@@ -66,22 +65,17 @@ sum(rightVal_nestbox[2:5])
 sum(rightVal_unmanipulated[2:5])
 ```
 
-One thing to note is that the stable age distribution for the nestboxes' subadult 3 is 0, while it is 0.0055 
-The sensitivities: 
-
 ```{r}
 sense #nestbox
 sense2 #unmanipulated
 ```
-
-And the elasticities:
 
 ```{r}
 elast #nestbox
 elast2 #unmanipulated
 ```
 
-4) Using the calculations in part (c), or additional calculations, address the question you proposed in part (b).
+# 4) Using the calculations in part (c), or additional calculations, address the question you proposed in part (b).
 
 If the end goal ultimately is to increase the population of Peregrine Falcons in the Cape region, nestboxes can be an effective or ineffective strategy depending on what other strategies you plan to use in conjunction with them.
 
