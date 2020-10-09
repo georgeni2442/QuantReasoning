@@ -54,7 +54,6 @@ sense2<-sensitivity(comadre$mat[[849]]$matA)
 elast2<-elasticity(comadre$mat[[849]]$matA)
 ```
 
-4) Using the calculations in part (c), or additional calculations, address the question you proposed in part (b).
 
 Eigenvalues for nestboxes and unmanipulated populations were 1.03127, and 0.9368. The stable age distributions, or right eigenvector, are shown below: 
 
@@ -62,18 +61,37 @@ Eigenvalues for nestboxes and unmanipulated populations were 1.03127, and 0.9368
 rightVal_nestbox
 rightVal_unmanipulated
 ```
+
+```{r}
+sum(rightVal_nestbox[2:5])
+sum(rightVal_unmanipulated[2:5])
+```
+
 One thing to note is that the stable age distribution for the nestboxes' subadult 3 is 0, while it is 0.0055 
 The sensitivities: 
 
 ```{r}
-sense
-sense2
+sense #nestbox
+sense2 #unmanipulated
 ```
 
 And the elasticities:
 
 ```{r}
-elast
-elast2
+elast #nestbox
+elast2 #unmanipulated
 ```
+
+4) Using the calculations in part (c), or additional calculations, address the question you proposed in part (b).
+
+If the end goal ultimately is to increase the population of Peregrine Falcons in the Cape region, nestboxes can be an effective or ineffective strategy depending on what other strategies you plan to use in conjunction with them.
+
+If the singular goal is to increase the breeding population (ie Subadult 1-3 and Breeders) of Peregrine Falcons in the Cape region, nestboxes are not an effective strategy. When compared to natural breeding populations (read "unmanipulated"), the stable distribution of the nestbox population has a higher proportion of juveniles (non-breeding) as compared to the natural population. Additionally, the natural population has both a higher proportion of Breeders (the group with the highest fecundity) and a higher proportion of all age classes with a fecundity rate of >0, as compared to the nestbox population. This means that dynamics within the natural population facilitate a larger percentage of individuals reaching sexual maturity which is most important for a functional population and the long-term survival of the species.
+
+If additional interventions were used, such as captive rearing of young, nestboxes could be an effective strategy to support increased breeding by wild populations. Captive rearing as an additional intervention paired with nestboxes could help address the limited progression through the upper age classes seen in the nestbox population stable age distribution.
+
+We are unclear about what the sensitivity and elasticity mean for manipulating Peregrine Falcon populations through intervention. Based on our understanding of sensitivity (and elasticity), if you change a single vital rate in the Leslie Matrix by a small absolute amount (or percentage amount), the resulting eigenvalue will change by a factor of the amount listed in the sensitivity or elasticity matrix. So in the case of the sense matrix, if we were to change the value comadre$mat[[835]]$matA[1,1] by a small amount, then the eigenvalue would change by a factor of 0.1395188. Because 0.1395188 is less than 1, then, any small change to the vital value in comadre$mat[[835]]$matA[1,1] will lead to a decrease in the eigenvalue. 
+
+We are unclear about what this means for manipulating vital rates in Peregrine Falcon populations because, since all the values in our sensitivity and elasticity matrices are equal to 0 or are less than 1, any manipulation of vital rates would either result in an unchanged or a decreased eigenvalue. This suggests that any change in vital rates would ultimately decrease the population of Peregrine Falcons.
+
 
