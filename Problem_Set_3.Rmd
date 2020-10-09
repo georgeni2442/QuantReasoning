@@ -27,7 +27,6 @@ load("COMADRE_v.4.20.9.0.rdata")
 
 comadre$matrixClass[[835]]$MatrixClassAuthor
 
-comadre$metadata$CommonName
 comadre$mat[[835]]$matA #835 is 1997-2010 for Nestbox data
 
 lambdaVal_nestbox <-eigs(comadre$mat[[835]]$matA, what="lambda") #dominant eigenvalue
