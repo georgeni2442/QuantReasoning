@@ -47,7 +47,7 @@ comadre$mat[[849]]$matA #849 is 1997-2010 for unmanipulated data data
 lambdaVal_unmanipulated <-eigs(comadre$mat[[849]]$matA, what="lambda") #eigenvalue
 
 rightVal_unmanipulated <-eigs(comadre$mat[[849]]$matA, what="ss") #eigen vector (aka stable age distribution)
-s
+
 sense2<-sensitivity(comadre$mat[[849]]$matA)
 elast2<-elasticity(comadre$mat[[849]]$matA)
 ```
