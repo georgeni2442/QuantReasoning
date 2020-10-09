@@ -66,14 +66,14 @@ One thing to note is that the stable age distribution for the nestboxes' subadul
 The sensitivities: 
 
 ```{r}
-sense<-sensitivity(comadre$mat[[835]]$matA)
-sense2<-sensitivity(comadre$mat[[849]]$matA)
+sense
+sense2
 ```
 
 And the elasticities:
 
 ```{r}
-elast<-elasticity(comadre$mat[[835]]$matA)
-elast2<-elasticity(comadre$mat[[849]]$matA)
+elast
+elast2
 ```
 
