@@ -62,6 +62,7 @@ Eigenvalues for nestboxes and unmanipulated populations were 1.03127, and 0.9368
 rightVal_nestbox
 rightVal_unmanipulated
 ```
+One thing to note is that the stable age distribution for the nestboxes' subadult 3 is 0, while it is 0.0055 
 The sensitivities: 
 
 ```{r}
