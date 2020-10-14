@@ -9,22 +9,33 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
+require(deSolve)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+state <- c(N=50) #At N=10 and N=50, the population stays static, which could be eq? Starting at N-8, the population goes down to 0
+times <- seq(0,100,by=0.1)
 
-```{r cars}
-summary(cars)
+parameters <- c(b = 2.4,c=0.02,M=50,d=0.2)
+
+sterile_insect <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dN <- b*N/(N+M) - d - c*N
+    list(c(dN))   
+  })}
+
+out <- ode(y = state,times=times,func=sterile_insect,parms=parameters)
+
+result<-vector("numeric", 60)
+for (i in 1:60) {
+  dN<-dN <- 2.4*i/(i+50) - 0.2 - 0.02*i
+  result[i]<-dN
+}
+
+N<-seq(from=1, to=60, by=1)
+plot(x=N, y=result, lines(x = N,y = result), ylab="dN/dt", xlab="N", cex=0.1)
+points(x=10, y=0, pch=1, cex=2)
+points(x=50, y=0, pch=16, cex=2)
+abline(h=0)
+
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
