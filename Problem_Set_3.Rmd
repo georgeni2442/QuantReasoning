@@ -1,6 +1,6 @@
 ---
 title: "Problem Set 3"
-author: "Liza Morse"
+author: "Liza Morse and George Ni"
 date: "10/2/2020"
 output:
   pdf_document: default
@@ -83,8 +83,23 @@ If the singular goal is to increase the breeding population (ie Subadult 1-3 and
 
 If additional interventions were used, such as captive rearing of young, nestboxes could be an effective strategy to support increased breeding by wild populations. Captive rearing as an additional intervention paired with nestboxes could help address the limited progression through the upper age classes seen in the nestbox population stable age distribution.
 
-We are unclear about what the sensitivity and elasticity mean for manipulating Peregrine Falcon populations through intervention. Based on our understanding of sensitivity (and elasticity), if you change a single vital rate in the Leslie Matrix by a small absolute amount (or percentage amount), the resulting eigenvalue will change by a factor of the amount listed in the sensitivity or elasticity matrix. So in the case of the sense matrix, if we were to change the value comadre$mat[[835]]$matA[1,1] by a small amount, then the eigenvalue would change by a factor of 0.1395188. Because 0.1395188 is less than 1, then, any small change to the vital value in comadre$mat[[835]]$matA[1,1] will lead to a decrease in the eigenvalue. 
+We are unclear about what the sensitivity and elasticity mean for manipulating Peregrine Falcon populations through intervention. Based on our understanding of sensitivity (and elasticity), if you change a single vital rate in the Leslie Matrix by a small absolute amount (or percentage amount), the resulting eigenvalue will change by a factor of the amount listed in the sensitivity or elasticity matrix. So in the case of the sense matrix, if we were to change the value comadre$mat[[835]]$matA[1,1] by a small amount, then the eigenvalue would change by a factor of `r sense[1,1]` (\textcolor{red}{NOTE: I edited the code here to have in-line code display the calculation. This has the advantage of not needing to write out the number in the text.}). Because 0.1395188 is less than 1, then, any small change to the vital value in comadre$mat[[835]]$matA[1,1] will lead to a decrease in the eigenvalue. 
 
 We are unclear about what this means for manipulating vital rates in Peregrine Falcon populations because, since all the values in our sensitivity and elasticity matrices are equal to 0 or are less than 1, any manipulation of vital rates would either result in an unchanged or a decreased eigenvalue. This suggests that any change in vital rates would ultimately decrease the population of Peregrine Falcons.
 
+```{r,echo=T}
+my_mat <- comadre$mat[[835]]$matA
 
+original_lamda <- as.numeric(eigen(my_mat)$values[1])
+
+my_mat[2,1] = 2*my_mat[2,1]
+
+experimental_lamda <-as.numeric(eigen(my_mat)$values[1])
+```
+
+\textcolor{red}{We discussed this in class a bit, but the sensitivity only deals with small changes in a parameter and its effect on lambda. Another approach instead of sensitivity would be to simply increase a parameter in the matrix and see how this affects the eigenvalue. For example, if we double the parameter in the second row, first column of A, this increases the eigenvalue from `r original_lamda` to `r experimental_lamda`.}
+
+
+
+
+\textcolor{red}{10/10 Good job overall on this assignment. I thought it was really cool that you found a study with a nest box manipulation. Note that you can use various code chunk options (e.g., `echo=F` or `messages=F`) to clean up outputs of thee code.}
