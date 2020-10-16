@@ -10,54 +10,35 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+# Question 1
+![Crappy sketch of Individual Flow Diagram](Individual_Flow_Diagram.png)
+
+
+
+
 
 # Question 2
 Group Flow Diagram: 
 ![Group Flow Diagram](SES Coral Flow Chart.jpeg)
 
+
+
+
+
 # Question 3
 Flow Diagram: 
 ![Flow Diagram](Blank diagram.jpeg)
 Parameters: 
-*a represents competition between macro-algae and coral. 
-*g represents competition between macro-algae and turf
-*r represents competition between turf and coral
-*d represents some death parameter for coral 
+
+* a represents competition between macro-algae and coral. 
+* g represents competition between macro-algae and turf
+* r represents competition between turf and coral
+* d represents some death parameter for coral 
 
 
-```{r}
-require(deSolve)
-
-#adding comments
-state <- c(N=50) #At N=10 and N=50, the population stays static, which could be eq? Starting at N-8, the population goes down to 0
-times <- seq(0,100,by=0.1)
-
-parameters <- c(b = 2.4,c=0.02,M=50,d=0.2)
-
-sterile_insect <- function(t,state,parameters){
-  with(as.list(c(state,parameters)),{
-    dN <- b*N/(N+M) - d - c*N
-    list(c(dN))   
-  })}
-
-out <- ode(y = state,times=times,func=sterile_insect,parms=parameters)
-
-result<-vector("numeric", 60)
-for (i in 1:60) {
-  dN<- 2.4*i/(i+50) - 0.2 - 0.02*i
-  result[i]<-dN
-}
-
-N<-seq(from=1, to=60, by=1)
-plot(x=N, y=result, lines(x = N,y = result), ylab="dN/dt", xlab="N", cex=0.1)
-points(x=10, y=0, pch=1, cex=2)
-points(x=50, y=0, pch=16, cex=2)
-abline(h=0)
-
-```
 
 
-```{r}
+```{r echo=FALSE}
 require(deSolve)
 
 # Initial values
@@ -79,10 +60,23 @@ coral_model <- function(t,state,parameters){
     dP <- (s*P)*(1-(P/K))
     list(c(dM,dC,dT,dP))   
   })}
+```
 
 
-# Solve model and plot results
+
+```{r}
+# Model and plot results
 out <- ode(y = state,times=times,func=coral_model,parms=parameters)
-par(mfrow=c(1,1))
 plot(out,ylab='N',xlab='time',las=1, xlim=c(0,10))
 ```
+
+
+
+```{r}
+parameters <- c(a = 0.1,g=0.8,r=1.0,d=0.44,s=0.49,K=10) #Parameter a increased by .1
+out <- ode(y = state,times=times,func=coral_model,parms=parameters)
+plot(out,ylab='N',xlab='time',las=1, xlim=c(0,10))
+
+```
+
+We found that changes in parameter a resulted in the largest effect on coral populations, as increases in a, which is the competition between macro-algae and coral, resulted in coral population (N) declining faster. 
