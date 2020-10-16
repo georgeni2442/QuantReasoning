@@ -44,7 +44,7 @@ out <- ode(y = state,times=times,func=sterile_insect,parms=parameters)
 
 result<-vector("numeric", 60)
 for (i in 1:60) {
-  dN<-dN <- 2.4*i/(i+50) - 0.2 - 0.02*i
+  dN<- 2.4*i/(i+50) - 0.2 - 0.02*i
   result[i]<-dN
 }
 
@@ -81,9 +81,8 @@ coral_model <- function(t,state,parameters){
   })}
 
 
-
 # Solve model and plot results
 out <- ode(y = state,times=times,func=coral_model,parms=parameters)
 par(mfrow=c(1,1))
-plot(out,ylab='N',xlab='time',las=1)
+plot(out,ylab='N',xlab='time',las=1, xlim=c(0,10))
 ```
