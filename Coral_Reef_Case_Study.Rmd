@@ -73,10 +73,38 @@ plot(out,ylab='N',xlab='time',las=1, xlim=c(0,10))
 
 
 ```{r}
-parameters <- c(a = 0.1,g=0.8,r=1.0,d=0.44,s=0.49,K=10) #Parameter a increased by .1
+parameters <- c(a = 0.2,g=0.8,r=1.0,d=0.44,s=0.49,K=10) #Parameter a increased by .1
 out <- ode(y = state,times=times,func=coral_model,parms=parameters)
 plot(out,ylab='N',xlab='time',las=1, xlim=c(0,10))
 
 ```
 
 We found that changes in parameter a resulted in the largest effect on coral populations, as increases in a, which is the competition between macro-algae and coral, resulted in coral population (N) declining faster. 
+
+
+# Part B
+
+```{r}
+
+# From Thampi et al. 2018 paper https://www.nature.com/articles/s41598-018-20341-0#Sec6
+
+require(deSolve)
+coupled_model <- function(Time, State, Pars) {
+  with(as.list(c(State, Pars)), {
+    dM <-  a*M*C - (P*M)/(M+T) + gamma*M*T
+    dC <-  r*T*C - d*C - a*M*C
+    dT <- (P*M)/(M+T) - gamma*M*T - r*T*C + d*C
+    dP <- s*P*(1 - P/C) - sigma*P*(1 - X)
+    dX <- kappa*X*(1 - X)*(-1 + j*(1 - C) - sigma*P*(1 - X) + phi*(2*X - 1))
+    return(list(c(dM,dC,dT,dP,dX)))  
+  })
+}
+
+pars <- c(a = 0.1, gamma = 0.8, r = 1.0, d = 0.44, s = 0.49, sigma = 0.5, kappa= 1.014, j=1.68, sigma = 0.5, phi = 0.2)
+
+
+yini  <- c(M = 0.05, C = 0.9, T = 0.05, P = 0.4, X = 0.5)
+times <- seq(0, 100, by = 0.1)
+out   <- ode(yini, times, coupled_model, pars)
+plot(out, ylab="N", xlab="time")
+```
