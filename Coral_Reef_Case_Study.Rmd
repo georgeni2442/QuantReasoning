@@ -2,14 +2,27 @@
 title: "Coral_Reef_Case_Study"
 author: "George Ni"
 date: "10/14/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Question 2
+Group Flow Diagram: 
+![Group Flow Diagram](SES Coral Flow Chart.jpeg)
+
 # Question 3
+Flow Diagram: 
+![Flow Diagram](Blank diagram.jpeg)
+Parameters: 
+*a represents competition between macro-algae and coral. 
+*g represents competition between macro-algae and turf
+*r represents competition between turf and coral
+*d represents some death parameter for coral 
 
 
 ```{r}
@@ -73,3 +86,4 @@ coral_model <- function(t,state,parameters){
 out <- ode(y = state,times=times,func=coral_model,parms=parameters)
 par(mfrow=c(1,1))
 plot(out,ylab='N',xlab='time',las=1)
+```
