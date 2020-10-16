@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 require(deSolve)
 
+#adding comments
 state <- c(N=50) #At N=10 and N=50, the population stays static, which could be eq? Starting at N-8, the population goes down to 0
 times <- seq(0,100,by=0.1)
 
@@ -39,3 +40,34 @@ points(x=50, y=0, pch=16, cex=2)
 abline(h=0)
 
 ```
+
+
+```{r}
+require(deSolve)
+
+# Initial values
+state <- c(M=10,P=10,T=10,C=10)
+times <- seq(0,100,by=0.1)
+
+
+
+# Parameters
+parameters <- c(a = 0.1,g=0.8,r=1.0,d=0.44,s=0.49,K=10)
+
+
+# Model
+coral_model <- function(t,state,parameters){
+  with(as.list(c(state,parameters)),{
+    dM <- (a*M*C) -((P*M)/(M + T))+ (g*M*T)
+    dC <- (r*T*C)-(d*C)-(a*M*C)
+    dT <- ((P*M)/(M + T))-(g*M*T)-(r*T*C)+(d*C)
+    dP <- (s*P)*(1-(P/K))
+    list(c(dM,dC,dT,dP))   
+  })}
+
+
+
+# Solve model and plot results
+out <- ode(y = state,times=times,func=coral_model,parms=parameters)
+par(mfrow=c(1,1))
+plot(out,ylab='N',xlab='time',las=1)
