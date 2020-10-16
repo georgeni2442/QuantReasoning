@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 require(deSolve)
 
+#adding comments
 state <- c(N=50) #At N=10 and N=50, the population stays static, which could be eq? Starting at N-8, the population goes down to 0
 times <- seq(0,100,by=0.1)
 
