@@ -1,0 +1,84 @@
+---
+title: "Wright_Fisher_Model_Ni"
+author: "George Ni"
+date: "11/6/2020"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 1: Wright-Fisher model with genetic drift and mutation
+# Created by Easton R. White
+# Last edited: 4-Nov-2020
+
+```{r}
+N=500      # population size 
+p_ini= 0.2   # the initial frequency of the A allele
+u = 0.1      # mutation rate from a to A
+max.time=100 # time to run simulations
+
+
+sample.population <- function(p,N){
+  next_pop = vector('character',length = N)
+  for (i in 1:N){
+    new_allele = sample(x = c('A','a'),size = 1,prob=c(p,1-p))
+    if (new_allele=='a' & rbinom(1,1,prob = u)){new_allele='A'} # Optional line to include mutation
+    next_pop[i] = as.character(new_allele)
+  }
+  return(sum(next_pop=='A')/N) # returns the value for p
+}
+
+
+
+p = vector(mode = 'numeric',length = max.time)
+p[1]=p_ini
+
+for (t in 1:(max.time-1)){
+  p[t+1] = sample.population(p[t],N)
+}
+
+plot(1:max.time,p,ylim=c(0,1),type='l',las=1,ylab='Freq(A)',xlab='Time')
+```
+
+## Part 1 
+# 1. What is the effect of population size (N) on the probability of extinction of A allele?
+
+Increasing population size (N) decreases the probability of extinction of the A allele. 
+
+# 2. How does the initial frequency of the A allele affect the probability it will reach fixation?
+
+Increasing the initial frequency of the A allele dramatically increases the probability that it will reach fixation, and decreases in initial frequency increase the probability of reaching extinction. 
+
+
+# 3. Let's now study the combined effects of mutation and genetic drift. Modify the above code to include a probability, u, that if a small "a" allele is chosen, it will mutate to be a big A allele. How does this affect our findings in questions 1 and 2?
+
+By including the probability u that small "a" allele might mutate to be a big A allele,increases in that probability speed up the rate at which a particular allele reaches fixation. 
+
+
+
+
+## PART 2: Quantitative Genetics with Reed deer on island of Jersey
+
+## Key stats
+## Population established there 6000 years ago
+## Change in mean body weight from 220kg to 36kg
+## 5 year generation time, heritability of 0.5
+
+
+
+## 1. What is the mean change in body weight per generation?
+
+Mean change in body weight per generation. 6000 years/5 years/gen = 1200 generations
+220-36=184 kg change in mean body weight. Assuming equal reduction in body weight over time, we see a 0.1533 change in body weight per generation. 
+
+## 2. What is the mean change in body weight caused by selection (estimate S)?
+ TO calculate the effect of mean change caused by selection, we utilize the breeder's equation, $R=h^2*S$ . Knowing R, which is the mean change per generation, we divide that by our h2, or heritability, to estimate S. $R/h^2=S$. $0.1533/0.5=S$ $S=0.3066$
+
+## 3. What assumptions are we making in these calculations?
+We're assuming that there are equal reductions in body weight over time. Also, we are assuming that a lot of variables are static, such as there being no mutations, that all individuals are breeding. 
+  
+
